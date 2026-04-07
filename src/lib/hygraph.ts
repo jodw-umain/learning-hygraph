@@ -8,10 +8,16 @@ export async function hygraphFetch<T>({
   revalidate?: number;
 }): Promise<T> {
   const HYGRAPH_ENDPOINT = process.env.HYGRAPH_ENDPOINT!;
+  const HYGRAPH_AUTH_TOKEN = process.env.HYGRAPH_DEV_AUTH_TOKEN;
 
   const res = await fetch(HYGRAPH_ENDPOINT, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      ...(HYGRAPH_AUTH_TOKEN && {
+        Authorization: `Bearer ${HYGRAPH_AUTH_TOKEN}`,
+      }),
+    },
     body: JSON.stringify({ query, variables }),
     ...(revalidate !== undefined && { next: { revalidate } }),
   });
