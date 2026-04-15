@@ -1,39 +1,23 @@
-import Link from "next/link";
-import { hygraphFetch } from "../lib/hygraph";
-
-type ShellsResponse = {
-  shells: {
-    id: string;
-    title: string;
-    shellSlug: string;
-  }[];
-};
-
 export default async function Home() {
-  const { shells } = await hygraphFetch<ShellsResponse>({
-    query: `
-      query Shells {
-        shells {
-          id
-          title
-          shellSlug
-        }
-      }
-    `,
-  });
-
   return (
     <main>
-      <h1 className="uppercase">hello world</h1>
-      <p>go to shells page hehehe</p>
+      {/* nav links */}
+      {/* hero */}
+      {/* - headline */}
+      {/* - supporting copy */}
+      {/* - hero image */}
 
-      <ul>
-        {shells.map((shell) => (
-          <li key={shell.id}>
-            <Link href={`/shells/${shell.shellSlug}`}>{shell.title}</Link>
-          </li>
-        ))}
-      </ul>
+      {/* showcase */}
+
+      {/* testimonials */}
+
+      {/* why us */}
+
+      {/* cta */}
+
+      {/* faq */}
+
+      <h1>hello world!</h1>
     </main>
   );
 }
