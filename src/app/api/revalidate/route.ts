@@ -14,10 +14,10 @@ export async function POST(request: NextRequest) {
     request.headers.get("X-Revalidate-Secret") ??
     request.nextUrl.searchParams.get("secret");
 
-  console.log("provided: ", provided);
-  console.log("expected: ", expected);
-
   if (provided !== expected) {
+    console.log("revalidate 401", {
+      headers: Object.fromEntries(request.headers),
+    });
     return Response.json({ ok: false }, { status: 401 });
   }
 
