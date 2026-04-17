@@ -11,8 +11,11 @@ export async function POST(request: NextRequest) {
   }
 
   const provided =
-    request.headers.get("x-revalidate-secret") ??
+    request.headers.get("X-Revalidate-Secret") ??
     request.nextUrl.searchParams.get("secret");
+
+  console.log("provided: ", provided);
+  console.log("expected: ", expected);
 
   if (provided !== expected) {
     return Response.json({ ok: false }, { status: 401 });
