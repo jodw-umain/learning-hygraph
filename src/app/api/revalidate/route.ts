@@ -16,6 +16,9 @@ export async function POST(request: NextRequest) {
 
   if (provided !== expected) {
     console.log("revalidate 401", {
+      url: request.url,
+      search: request.nextUrl.search,
+      secretParam: request.nextUrl.searchParams.get("secret"),
       headers: Object.fromEntries(request.headers),
     });
     return Response.json({ ok: false }, { status: 401 });
