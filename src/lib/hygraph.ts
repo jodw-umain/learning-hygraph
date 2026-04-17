@@ -2,10 +2,12 @@ export async function hygraphFetch<T>({
   query,
   variables,
   revalidate,
+  tags = ["hygraph"],
 }: {
   query: string;
   variables?: Record<string, unknown>;
   revalidate?: number;
+  tags?: string[];
 }): Promise<T> {
   const HYGRAPH_ENDPOINT = process.env.HYGRAPH_ENDPOINT!;
   const HYGRAPH_AUTH_TOKEN = process.env.HYGRAPH_DEV_AUTH_TOKEN;
@@ -19,7 +21,7 @@ export async function hygraphFetch<T>({
       }),
     },
     body: JSON.stringify({ query, variables }),
-    ...(revalidate !== undefined && { next: { revalidate } }),
+    next: { tags, ...(revalidate !== undefined && { revalidate }) },
   });
 
   const json = await res.json();

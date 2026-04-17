@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { AutoRefresh } from "../components/auto-refresh";
 import { Footer } from "../components/footer";
 import { Nav } from "../components/nav";
 import "./globals.css";
@@ -33,6 +34,7 @@ export default function RootLayout({
         <Nav />
         <div className="max-w-6xl mx-auto w-full flex-1">{children}</div>
         <Footer />
+        <AutoRefresh />
       </body>
     </html>
   );
